@@ -85,7 +85,5 @@ def test_dep():
         log(dep + ' OK')
     log('Dependencies OK')
 
-
-
 if __name__ == "__main__":
     main()
