@@ -2,10 +2,17 @@
 
 TITLE nocha installer - Faiz
 
+ECHO.
+ECHO.
+ECHO.
+
+ECHO nocha installer
+
 NET SESSION >NUL 2>&1
 IF %ERRORLEVEL% NEQ 0 (
+    ECHO.
     ECHO Please run me as administrator (:
-    PAUSE
+    PAUSE > NUL
     EXIT /b 
 )
 ECHO.

@@ -8,8 +8,8 @@ def get_input(message, validator):
     log('Validating ~' + u_in)
 
     if validator(u_in):
-        log('~' + u_in + ' valid')
+        log('\n~' + u_in + ' valid')
         return u_in
     
     log('Invalid input ~' + u_in + ' try again...')
-    get_input(message, validator)
+    return get_input(message, validator)
