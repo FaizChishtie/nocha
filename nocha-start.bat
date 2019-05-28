@@ -18,15 +18,19 @@ IF %ERRORLEVEL% NEQ 0 (
     PAUSE > NUL
     EXIT /b
 )
+ECHO. 
 
 ECHO python OK
+
+SETLOCAL
+CD /d %~dp0
 
 ECHO.
 ECHO.
 
 ECHO starting nocha...
 
-python3 nocha.py
+py "src\nocha.py"
 
 ECHO.
 

@@ -1,0 +1,6 @@
+README.md
+nocha.egg-info/PKG-INFO
+nocha.egg-info/SOURCES.txt
+nocha.egg-info/dependency_links.txt
+nocha.egg-info/entry_points.txt
+nocha.egg-info/top_level.txt

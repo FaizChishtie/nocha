@@ -23,12 +23,28 @@ ECHO nocha installer
 
 ECHO nocha installs starting...
 
-goto choco
-goto nodist
+CALL :check_req choco choco
+CALL :check_req nodist nodist
+ECHO .
+
+ECHO installs complete...
 
 ECHO.
 ECHO.
 ECHO.
+
+PAUSE >NUL
+
+:: subroutines
+
+:check_req
+    SET "MISSING_REQUIREMENT=true"
+    
+    WHERE %1 > NUL 2>&1 && SET "MISSING_REQUIREMENT=false"
+    IF "%MISSING_REQUIREMENT%"=="true" (
+        GOTO %2
+    )
+    EXIT /b
 
 :choco
     ECHO installing chocolatey...
