@@ -58,9 +58,9 @@ EXIT /b
         GOTO bad_install
     )
     
-    py -m pip install --user --upgrade setuptools wheel
-    py "src\setup.py" sdist bdist_wheel
-    py -m pip install dist\nocha-0.1.0-py3-none-any.whl
+    python3 -m pip install --user --upgrade setuptools wheel
+    python3 "src\setup-egg.py" sdist bdist_wheel
+    python3 -m pip install dist\nocha-0.1.0-py3-none-any.whl
 
     EXIT /b
 
@@ -79,14 +79,29 @@ EXIT /b
     ECHO done!
 
 :nodist
+    ECHO uninstalling nodejs from programs and replacing it with nodist...
+    CALL :uninstaller "nodejs"
     ECHO installing nodist...
     choco install nodist
+    ECHO done!
+
+:python
+    ECHO installing python3
+    choco install python
     ECHO done!
 
 :pip
     ECHO installing pip...
     choco install pip
     ECHO done!
+
+:uninstaller
+    WMIC "where name="%1" call uninstall"
+
+:path_setter
+    ECHO Setting path for %1 under %2
+    FOR /f %%p in ('where python') do SET PYTHONPATH=%%p
+    ECHO %PYTHONPATH%
 
 :bad_install
     ECHO.

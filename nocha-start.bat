@@ -14,7 +14,8 @@ ECHO Checking python installation...
 python3 --version 2>NUL 2>&1
 IF %ERRORLEVEL% NEQ 0 (
     ECHO.
-    ECHO Python 3 is not installed! Please install and try again...
+    ECHO Python 3 is not installed ): 
+    ECHO Please run the installer and try again!
     PAUSE > NUL
     EXIT /b
 )
