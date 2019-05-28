@@ -59,7 +59,7 @@ EXIT /b
     )
     
     python3 -m pip install --user --upgrade setuptools wheel
-    python3 "src\setup-egg.py" sdist bdist_wheel
+    python3 setup.py sdist bdist_wheel
     python3 -m pip install dist\nocha-0.1.0-py3-none-any.whl
 
     EXIT /b

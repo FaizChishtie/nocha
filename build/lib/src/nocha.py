@@ -130,6 +130,5 @@ def read_pkg(pkg):
     
     return False
 
-# main program
 if __name__ == "__main__":
     main()

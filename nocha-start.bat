@@ -19,7 +19,7 @@ IF %ERRORLEVEL% NEQ 0 (
     PAUSE > NUL
     EXIT /b
 )
-ECHO. 
+ECHO.
 
 ECHO python OK
 
@@ -31,7 +31,7 @@ ECHO.
 
 ECHO starting nocha...
 
-py "src\nocha.py"
+python3 "src\nocha.py"
 
 ECHO.
 
