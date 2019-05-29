@@ -10,3 +10,4 @@ src/__main__.py
 src/cmd.py
 src/logger.py
 src/nochaio.py
+src/ospe.py

@@ -1,25 +1,39 @@
 from src.logger import log
 from src.cmd import which, do_ext
 from src.nochaio import get_input, read_json, find_file
+from src.ospe import os_det, use
 from . import __version__ as version
 
 # use log for loggable
 
 VERSION_NUMBER = version
 
-DEPENDENCIES = [ 'nodist' ]
+DEPENDENCIES = { 'win32': [ 'nodist' ], 'darwin': [ 'n' ], 'linux': [ 'n' ], 'linux2': [ 'n' ] }
 
 PACKAGE_JSON_EXISTS = False
 
 NODE_VERSION_SPECIFIED = None
 
+OPERATING_SYSTEM = None
+
+COMMAND = None
+
 # main routine
 def main():
     print('\n\n\nWelcome to nocha v' + VERSION_NUMBER)
-    test_dep()
+
+    log('\nDetecting OS')
+    
+    OPERATING_SYSTEM = os_det()
+    log('\t~' + OPERATING_SYSTEM + ' detected...')
+
+    COMMAND = use(OPERATING_SYSTEM)
+    log('\nUsing ~\'' + COMMAND + '\'')
+
+    test_dep(OPERATING_SYSTEM)
 
     pkg = 'package.json'
-    
+
     PACKAGE_JSON_EXISTS = m_find_json(pkg)
 
     skip_m_in = False
@@ -81,6 +95,8 @@ def swap(version_spec=None):
         version_spec = get_input('Enter the version of node you\'d like to swap to ~', vald_pch)
     do_ext('nodist ' + version_spec)
     log('Swapped node version ~' + version_spec)
+    log('\nMatching npm version')
+    do_ext('nodist npm match')
 
 # install
 def install():
@@ -110,9 +126,9 @@ def m_find_json(pkg):
     return found
 
 # tests dependencies
-def test_dep():
+def test_dep(OPERATING_SYSTEM):
     print('\n\nTesting dependencies...')
-    for dep in DEPENDENCIES:
+    for dep in DEPENDENCIES[OPERATING_SYSTEM]:
         test = which(dep)
         if(test == None):
             log('Dependency ' + dep  + ' not installed...\nPlease install and try again...')
