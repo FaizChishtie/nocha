@@ -8,5 +8,5 @@ nocha.egg-info/top_level.txt
 src/__init__.py
 src/__main__.py
 src/cmd.py
-src/log.py
+src/logger.py
 src/nochaio.py

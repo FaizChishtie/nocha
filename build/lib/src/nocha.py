@@ -1,10 +1,11 @@
 from log import log
 from cmd import which, do_ext
 from nochaio import get_input, read_json, find_file
+from . import __version__ as version
 
 # use log for loggable
 
-VERSION_NUMBER = '0.1.0'
+VERSION_NUMBER = version
 
 DEPENDENCIES = [ 'nodist' ]
 
@@ -130,5 +131,9 @@ def read_pkg(pkg):
     
     return False
 
+def run():
+    if __name__ == "__main__":
+        main()
+
 if __name__ == "__main__":
-    main()
+    run()

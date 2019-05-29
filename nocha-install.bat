@@ -28,7 +28,7 @@ ECHO nocha installs starting...
 
 CALL :check_req choco choco
 CALL :check_req nodist nodist
-CALL :check_req pip pip
+:: CALL :check_req pip pip
 ECHO.
 
 CALL :setup
@@ -50,7 +50,7 @@ EXIT /b
 :setup
     ECHO.
     ECHO setting nocha up...
-    python3 --version 2>NUL 2>&1
+    py --version 2>NUL 2>&1
     IF %ERRORLEVEL% NEQ 0 (
         ECHO.
         ECHO Python 3 is not installed! Please install and try again...
@@ -58,9 +58,7 @@ EXIT /b
         GOTO bad_install
     )
     
-    python3 -m pip install --user --upgrade setuptools wheel
-    python3 setup.py sdist bdist_wheel
-    python3 -m pip install dist\nocha-0.1.0-py3-none-any.whl
+    py setup.py install
 
     EXIT /b
 

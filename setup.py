@@ -1,9 +1,8 @@
 import setuptools
-
-print(setuptools.find_packages())
+from src import __version__
 
 setuptools.setup(name='nocha',
-      version='0.1.0',
+      version=__version__,
       description='nocha is a tool that makes it easier to swap versions of node with',
       url='https://github.com/FaizChishtie/nocha',
       author='Faizaan Chishtie',

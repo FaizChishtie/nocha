@@ -1,4 +1,4 @@
-from log import log
+from src.logger import log
 import os, subprocess
 
 # cmd methods

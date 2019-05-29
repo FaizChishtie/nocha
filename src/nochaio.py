@@ -1,5 +1,5 @@
 import json, glob, re
-from log import log
+from src.logger import log
 
 # gets and validates input based on validator output
 # on None invalid
@@ -20,7 +20,11 @@ def get_input(message, validator):
 def read_json(file):
     with open(file) as jfile:
         dep = json.load(jfile)
-        return transform_dep_readable(dep['dependencies']['node'])
+        if 'node' in dep['dependencies']:
+                return transform_dep_readable(dep['dependencies']['node'])
+        else:
+                log('\t~' + file + ' found but no node version specified...\nReturning to main...\n')
+                return None
 
 # looks for file in current directory
 def find_file(file):
