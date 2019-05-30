@@ -21,6 +21,12 @@ def which(e):
     
     return None
 
-def do_ext(command): 
+def do_ext(command, _os): 
     log('Doing ~' + command)
-    os.system('cmd /c' + command)
+
+    w32 = ''
+
+    if _os == 'win32':
+        w32 = 'cmd /c'
+
+    os.system(w32 + command)
