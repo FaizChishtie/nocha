@@ -27,7 +27,9 @@ ECHO nocha installer
 ECHO nocha installs starting...
 
 CALL :check_req choco choco
+CALL :check_req node node
 CALL :check_req nodist nodist
+CALL :check_req py python
 :: CALL :check_req pip pip
 ECHO.
 
@@ -49,14 +51,8 @@ EXIT /b
 
 :setup
     ECHO.
+    ECHO depencencies OK
     ECHO setting nocha up...
-    py --version 2>NUL 2>&1
-    IF %ERRORLEVEL% NEQ 0 (
-        ECHO.
-        ECHO Python 3 is not installed! Please install and try again...
-        PAUSE > NUL
-        GOTO bad_install
-    )
     
     py setup.py install
 
@@ -77,29 +73,23 @@ EXIT /b
     ECHO done!
 
 :nodist
-    ECHO uninstalling nodejs from programs and replacing it with nodist...
-    CALL :uninstaller "nodejs"
-    ECHO installing nodist...
-    choco install nodist
-    ECHO done!
+    CALL :installer nodist
 
 :python
-    ECHO installing python3
-    choco install python
-    ECHO done!
+    CALL :installer python
 
 :pip
-    ECHO installing pip...
-    choco install pip
+    CALL :installer pip
+
+:installer 
+    ECHO installing %1
+    choco install %1
     ECHO done!
 
 :uninstaller
-    WMIC "where name="%1" call uninstall"
-
-:path_setter
-    ECHO Setting path for %1 under %2
-    FOR /f %%p in ('where python') do SET PYTHONPATH=%%p
-    ECHO %PYTHONPATH%
+    ECHO uninstalling %1
+    choco uninstall %1
+    ECHO done!
 
 :bad_install
     ECHO.

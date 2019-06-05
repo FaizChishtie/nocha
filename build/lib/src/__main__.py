@@ -30,7 +30,9 @@ def main():
     COMMAND = use(OPERATING_SYSTEM)
     log('\nUsing ~\'' + COMMAND + '\'')
 
-    test_dep(OPERATING_SYSTEM)
+    if not test_dep(OPERATING_SYSTEM):
+        input('Press any key to exit...')
+        exit(1)
 
     pkg = 'package.json'
 
@@ -150,9 +152,10 @@ def test_dep(OPERATING_SYSTEM):
         test = which(dep)
         if(test == None):
             log('Dependency ' + dep  + ' not installed...\nPlease install and try again...')
-            return
+            return False
         log(dep + ' OK')
     log('Dependencies OK')
+    return True
 
 def read_pkg(pkg):
     log('Reading ~\'' + pkg + '\'...')
